@@ -23,7 +23,6 @@ class OrderRepoTest {
         //THEN
         assertEquals(expectedMap, actual);
 
-
     }
 
     @Test
@@ -41,7 +40,6 @@ class OrderRepoTest {
 
         //THEN
         assertNotEquals(expectedMap, actual);
-
 
     }
 
