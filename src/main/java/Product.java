@@ -1,20 +1,22 @@
+import java.util.Objects;
+
 public class Product {
-    private int id;
+    private String id;
     private String name;
 
     public Product() {
     }
 
-    public Product(int id, String name) {
+    public Product(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,14 +43,14 @@ public class Product {
 
         Product product = (Product) o;
 
-        if (id != product.id) return false;
-        return name.equals(product.name);
+        if (!Objects.equals(id, product.id)) return false;
+        return Objects.equals(name, product.name);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + name.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 }
