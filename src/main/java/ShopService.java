@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class ShopService {
     private ProductRepo productRepo;
@@ -15,8 +18,8 @@ public class ShopService {
     }
 
     //Methode, welche die gesamte Liste von Produkt aufruft
-    public Map<String, Product> listProducts(){
-        return productRepo.list();
+    public List<Product> listProducts(){
+        return new ArrayList<>(productRepo.list().values());
     }
 
     //Methode, welche ein Order mit einer vorgegebenen ID aufruft
@@ -29,7 +32,18 @@ public class ShopService {
     }
 
     //Methode fügt eine Order der Liste hinzu
-    public void addOrder(Order order){
+//    public void addOrder(Order order) {
+//        orderRepo.add(order);
+//    }
+
+    public void addOrder(Order order) throws NoSuchElementException {
+        for (Product product : productRepo.list().values()) {
+            for (Product orderedProduct : order.getOrderedProducts().values())
+            if (!product.getId().equals(orderedProduct.getId())) {
+                throw new NoSuchElementException("Product with ID " + product.getId() + " does not exist");
+            }
+        }
         orderRepo.add(order);
     }
+
 }
