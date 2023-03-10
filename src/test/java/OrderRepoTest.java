@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,8 +12,8 @@ class OrderRepoTest {
     void addNewOrder() {
         //GIVEN
         Map<String, Order> orderTestMap = new HashMap<>();
-        Order order1 = new Order("Or01", Map.of(
-                "B10", new Product("B10", "Becher")
+        Order order1 = new Order("Or01", List.of(
+                new Product("B10", "Becher")
         ));
         OrderRepo orderRepo1 = new OrderRepo(orderTestMap);
         //WHEN
@@ -29,8 +30,8 @@ class OrderRepoTest {
     void addNewOrderFail() {
         //GIVEN
         Map<String, Order> orderTestMap = new HashMap<>();
-        Order order1 = new Order("Or01", Map.of(
-                "B10", new Product("B10", "Becher")
+        Order order1 = new Order("Or01", List.of(
+                 new Product("B10", "Becher")
         ));
         OrderRepo orderRepo1 = new OrderRepo(orderTestMap);
         //WHEN

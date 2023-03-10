@@ -18,7 +18,7 @@ public class ShopService {
     }
 
     //Methode, welche die gesamte Liste von Produkt aufruft
-    public List<Product> listProducts(){
+    public List<Product> listProducts() {
         return new ArrayList<>(productRepo.list().values());
     }
 
@@ -26,8 +26,9 @@ public class ShopService {
     public Order getOrder(String id) {
         return orderRepo.get(id);
     }
+
     //Methode, welche die gesamte Liste von Order aufruft
-    public Map<String, Order> listOrders(){
+    public Map<String, Order> listOrders() {
         return orderRepo.list();
     }
 
@@ -38,10 +39,10 @@ public class ShopService {
 
     public void addOrder(Order order) throws NoSuchElementException {
         for (Product product : productRepo.list().values()) {
-            for (Product orderedProduct : order.getOrderedProducts().values())
-            if (!product.getId().equals(orderedProduct.getId())) {
-                throw new NoSuchElementException("Product with ID " + product.getId() + " does not exist");
-            }
+            for (Product orderedProduct : order.getOrderedProducts())
+                if (!product.getId().equals(orderedProduct.getId())) {
+                    throw new NoSuchElementException("Product with ID " + product.getId() + " does not exist");
+                }
         }
         orderRepo.add(order);
     }

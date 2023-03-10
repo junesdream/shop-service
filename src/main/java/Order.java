@@ -1,10 +1,11 @@
+import java.util.List;
 import java.util.Map;
 
 public class Order {
     private String id;
-    private Map<String, Product> orderedProducts;
+    private List<Product> orderedProducts;
 
-    public Order(String id, Map<String, Product> orderedProducts) {
+    public Order(String id, List<Product> orderedProducts) {
         this.id = id;
         this.orderedProducts = orderedProducts;
     }
@@ -17,11 +18,11 @@ public class Order {
         this.id = id;
     }
 
-    public Map<String, Product> getOrderedProducts() {
+    public List<Product> getOrderedProducts() {
         return orderedProducts;
     }
 
-    public void setOrderedProducts(Map<String, Product> orderedProducts) {
+    public void setOrderedProducts(List< Product> orderedProducts) {
         this.orderedProducts = orderedProducts;
     }
 }
