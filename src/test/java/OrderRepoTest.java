@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,39 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderRepoTest {
 
     @Test
-    void addNewOrder() {
-        //GIVEN
-        Map<String, Order> orderTestMap = new HashMap<>();
-        Order order1 = new Order("Or01", List.of(
-                new Product("B10", "Becher")
-        ));
-        OrderRepo orderRepo1 = new OrderRepo(orderTestMap);
-        //WHEN
-        orderRepo1.add(order1);
-        Map<String, Order> actual = orderTestMap;
-        Map<String, Order> expectedMap = new HashMap<>(Map.of("Or01", order1));
+    void testAddAndGetOrder() {
+        // GIVEN
+        Order order = new Order("Or01", new ArrayList<>(), OrderStatus.NEW, LocalDateTime.now());
+        OrderRepo orderRepo = new OrderRepo(new HashMap<>());
 
-        //THEN
-        assertEquals(expectedMap, actual);
+        // WHEN
+        orderRepo.add(order);
+        Order retrievedOrder = orderRepo.get(order.getId());
 
-    }
-
-    @Test
-    void addNewOrderFail() {
-        //GIVEN
-        Map<String, Order> orderTestMap = new HashMap<>();
-        Order order1 = new Order("Or01", List.of(
-                 new Product("B10", "Becher")
-        ));
-        OrderRepo orderRepo1 = new OrderRepo(orderTestMap);
-        //WHEN
-        orderRepo1.add(order1);
-        Map<String, Order> actual = orderTestMap;
-        Map<String, Order> expectedMap = new HashMap<>(Map.of("Or02", order1));
-
-        //THEN
-        assertNotEquals(expectedMap, actual);
-
+        // THEN
+        assertEquals(order, retrievedOrder);
     }
 
 }

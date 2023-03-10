@@ -1,8 +1,11 @@
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Product {
     private String id;
     private String name;
+
+    private LocalDateTime datum;
 
     public Product() {
     }
